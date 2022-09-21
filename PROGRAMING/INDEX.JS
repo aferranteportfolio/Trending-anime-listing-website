@@ -19,7 +19,7 @@ const test = () => {
             const synapsis = document.createElement('span')
             synapsis.innerHTML += `${result.data[i].attributes.synopsis}`
             const rating = document.createElement('footer')
-            rating.innerHTML += `${result.data[i].attributes.averageRating}`
+            rating.innerHTML += `Rating ${result.data[i].attributes.averageRating}`
             const mainTitle = document.createElement('header')
             mainTitle.innerHTML +=`${result.data[i].attributes.slug}`
             newDiv.appendChild(newImg);
@@ -28,6 +28,8 @@ const test = () => {
             newDiv.appendChild(rating);   
             const currentDiv = document.getElementById("div1");
             document.body.insertBefore(newDiv, currentDiv);
+
+            button.style.display = "none"
         }
 
     }
