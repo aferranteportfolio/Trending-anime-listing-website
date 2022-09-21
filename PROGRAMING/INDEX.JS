@@ -1,10 +1,6 @@
 const button = document.getElementById('button');
 const footer = document.getElementById('footer')
-const mainBox = document.getElementById('title')
-const synapsis = document.getElementById('synapsis')
-const image = document.getElementById('image')
-
-let showList = ['test']
+let showList = []
 
 
 const test = () => {
@@ -15,17 +11,31 @@ const test = () => {
 
     xhr.onload = () => {
         const result = JSON.parse(xhr.response)
-        image.src = `${result.data[0].attributes.coverImage.large}`
-        mainBox.innerHTML = `<span style="background-color: lime">${result.data[0].attributes.slug}</span>`
-        synapsis.innerHTML = `<span style="background-color: yellow">${result.data[0].attributes.synopsis}</span>`
-        
-        // console.log(result.data[0])
-        // console.log(result.data[0].attributes.slug)
-        console.log(result.data[0].attributes.coverImage.large)
+
+        for (let i=0; i < result.data.length-1; i++) {
+            const newDiv = document.createElement("div");
+            const newImg = document.createElement("img");
+            newImg.src = `${result.data[i].attributes.coverImage.large}`
+            const synapsis = document.createElement('span')
+            synapsis.innerHTML += `${result.data[i].attributes.synopsis}`
+            const rating = document.createElement('footer')
+            rating.innerHTML += `${result.data[i].attributes.averageRating}`
+            const mainTitle = document.createElement('header')
+            mainTitle.innerHTML +=`${result.data[i].attributes.slug}`
+            newDiv.appendChild(newImg);
+            newDiv.appendChild(mainTitle);
+            newDiv.appendChild(synapsis);
+            newDiv.appendChild(rating);   
+            const currentDiv = document.getElementById("div1");
+            document.body.insertBefore(newDiv, currentDiv);
+        }
+
     }
     xhr.send()
 
 };
+
+
 
 button.addEventListener('click', test);
 
