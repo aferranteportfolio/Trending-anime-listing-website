@@ -9,7 +9,7 @@ newClassGroup.classList.add("row")
 
 test123.appendChild(newClassGroup);
 
-const test = () => {
+const dynamiccPageGenerator = () => {
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://kitsu.io/api/edge/trending/anime')
